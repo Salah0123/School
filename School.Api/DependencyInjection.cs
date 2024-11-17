@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using School.Api.Entities;
 using School.Api.Persistence;
+using School.Api.Services;
 
 namespace School.Api
 {
@@ -15,6 +19,7 @@ namespace School.Api
             services
                 .AddSwaggersServices()
                 .AddCorsServices()
+                .AddCustomServices()
                 .AddConnectionServices(configuration);
             return services;
         }
@@ -83,6 +88,12 @@ namespace School.Api
             return services;
         }
 
+        private static IServiceCollection AddCustomServices(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthService, AuthService>();
+            
+            return services;
+        }
 
     }
 }

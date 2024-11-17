@@ -7,9 +7,6 @@ namespace School.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
-            
             builder.Services.AddDependencies(builder.Configuration);
 
             var app = builder.Build();
@@ -29,7 +26,6 @@ namespace School.Api
             app.UseCors(); //before UseAuthorization();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

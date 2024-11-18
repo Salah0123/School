@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace School.Api.Persistence
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser, ApplicationRole,string>(options)
     {
         public required DbSet<Subject> Subjects { get; set; }
 

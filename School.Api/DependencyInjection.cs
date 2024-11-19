@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using School.Api.Authentication;
 using School.Api.Entities;
 using School.Api.Persistence;
 using School.Api.Services;
+using System.Text;
 
 namespace School.Api
 {
@@ -20,6 +23,7 @@ namespace School.Api
                 .AddSwaggersServices()
                 .AddCorsServices()
                 .AddCustomServices()
+                .AddAuthServices(configuration)
                 .AddConnectionServices(configuration);
             return services;
         }
@@ -91,9 +95,52 @@ namespace School.Api
         private static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthService, AuthService>();
-            
             return services;
         }
 
+        private static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<IJwtProvider, JwtProvider>();
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            //Jwt configuration
+            services.AddOptions<JwtOptions>().BindConfiguration(JwtOptions.SectionName)
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+            //services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+            var jwtSettings = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(o =>
+                {
+                    o.SaveToken = true;
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings?.Key!)),
+                        ValidIssuer = jwtSettings?.Issuer,
+                        ValidAudience = jwtSettings?.Audience
+                    };
+                });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = true;
+            });
+
+            return services;
+        }
     }
 }

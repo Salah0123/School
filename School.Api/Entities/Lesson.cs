@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Api.Entities
 {
-    public class Lesson
+    public class Lesson : BaseEntity
     {
-        [Key]
-        [Required]
-        public string LessonId { get; set; }
         [Required]
         public string LessonName { get; set; } = string.Empty;
 

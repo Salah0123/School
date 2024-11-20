@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Api.Entities
 {
-    public class SubscriptionTier
+    public class SubscriptionTier : BaseEntity
     {
-        [Key]
-        [Required]
-        public string SubscriptionTierId { get; set; }
         [Required]
         public string Name { get; set; }
 

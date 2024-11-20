@@ -24,9 +24,13 @@
 
 namespace School.Api.Entities
 {
-    public sealed class Subject
+    public class Subject : BaseEntity
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-    }
+        [Required]
+        public string SubjectName { get; set; } = string.Empty;
+
+        public virtual ICollection<Lesson> Lessons { get; set; }
+        public virtual ICollection<Grade> Grades { get; set; }
+/*        public virtual ICollection<Teacher> Teachers { get; set; }
+*/    }
 }

@@ -5,15 +5,10 @@ using System.Text.Json.Serialization;
 namespace School.Api.Entities
 {
     // اولى تانية تالتة
-    public class Grade
+    public class Grade : BaseEntity
     {
-        [Key]
-        [Required]
-        public string GradeId { get; set; }
         [Required]
         public string GradeName { get; set; } = string.Empty;
-
-        public DateTime CreatedOn { get; set; }
 
         [ForeignKey("Level")]
         [Required]

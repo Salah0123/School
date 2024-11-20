@@ -3,15 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Api.Entities
 {
-    public class Region
+    public class Region : BaseEntity
     {
-        [Key]
-        [Required]
-        public string RegionId { get; set; }
         [Required]
         public string RegionName { get; set; }
         public int TeacherCount { get; set; } = 0;
-        public DateTime CreatedOn { get; set; }
 
         [ForeignKey("SubscriptionTier")]
         [Required]

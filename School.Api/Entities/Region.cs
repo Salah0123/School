@@ -10,7 +10,8 @@ namespace School.Api.Entities
         public string RegionId { get; set; }
         [Required]
         public string RegionName { get; set; }
-        public int Count { get; set; }
+        public int TeacherCount { get; set; } = 0;
+        public DateTime CreatedOn { get; set; }
 
         [ForeignKey("SubscriptionTier")]
         [Required]

@@ -13,6 +13,8 @@ namespace School.Api.Entities
         [Required]
         public string GradeName { get; set; } = string.Empty;
 
+        public DateTime CreatedOn { get; set; }
+
         [ForeignKey("Level")]
         [Required]
         public string LevelId { get; set; }

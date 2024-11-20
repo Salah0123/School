@@ -11,6 +11,8 @@ namespace School.Api.Entities
         [Required]
         public string SubjectName { get; set; } = string.Empty;
 
+        public DateTime CreatedOn { get; set; }
+
         public virtual ICollection<Lesson> Lessons { get; set; }
         public virtual ICollection<Grade> Grades { get; set; }
 /*        public virtual ICollection<Teacher> Teachers { get; set; }

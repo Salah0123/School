@@ -13,6 +13,6 @@ namespace School.Api.Entities
 
         public virtual ICollection<Lesson> Lessons { get; set; }
         public virtual ICollection<Grade> Grades { get; set; }
-        public virtual ICollection<Teacher> Teachers { get; set; }
-    }
+/*        public virtual ICollection<Teacher> Teachers { get; set; }
+*/    }
 }

@@ -9,10 +9,10 @@ namespace School.Api.Entities
         [Required]
         public string AttendanceId { get; set; }
 
-        [ForeignKey("Student")]
+        /*[ForeignKey("Student")]
         [Required]
         public string Id{ get; set; }
-        public virtual Student? Student { get; set; }
+        public virtual Student? Student { get; set; }*/
 
         [ForeignKey("Lecture")]
         [Required]

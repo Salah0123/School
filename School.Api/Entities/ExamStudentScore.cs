@@ -7,10 +7,10 @@ namespace School.Api.Entities
     {
         [Key]
         public string ScoreID { get; set; }
-        [ForeignKey("Student")]
+        /*[ForeignKey("Student")]
         [Required]
         public string Id { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual Student Student { get; set; }*/
 
         [ForeignKey("Exam")]
         [Required]

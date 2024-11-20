@@ -9,10 +9,10 @@ namespace School.Api.Entities
         [Required]
         public string SubscriptionId { get; set; }
 
-        [ForeignKey("Teacher")]
+        /*[ForeignKey("Teacher")]
         [Required]
         public string Id { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public virtual Teacher Teacher { get; set; }*/
 
         [ForeignKey("SubscriptionTier")]
         [Required]

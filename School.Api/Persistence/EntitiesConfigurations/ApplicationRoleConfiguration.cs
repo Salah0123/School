@@ -12,10 +12,10 @@ namespace School.Api.Persistence.EntitiesConfigurations
         {
             //defaultData
 
-            builder.HasData(new ApplicationRole
+           /* builder.HasData(new ApplicationRole
             { 
                 Id = 
-            });
+            });*/
         }
         
     }

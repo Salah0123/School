@@ -19,6 +19,6 @@ namespace School.Api.Entities
         public virtual Level Level { get; set; }
 
         public ICollection<Subject> Subjects { get; set; }
-        public ICollection<Teacher> Teachers { get; set; }
-    }
+/*        public ICollection<Teacher> Teachers { get; set; }
+*/    }
 }

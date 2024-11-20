@@ -17,12 +17,12 @@ namespace School.Api.Entities
         public string GradeId { get; set; }
         public virtual Grade Grade { get; set; }
 
-        [ForeignKey("Teacher")]
+       /* [ForeignKey("Teacher")]
         public string Id {  get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public virtual Teacher Teacher { get; set; }*/
 
         public int StudentCount { get; set; }
         
-        public virtual ICollection<Student> Students { get; set; } = [];    
-    }
+/*        public virtual ICollection<Student> Students { get; set; }   
+*/    }
 }

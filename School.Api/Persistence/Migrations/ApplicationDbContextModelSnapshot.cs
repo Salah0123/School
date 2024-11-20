@@ -22,21 +22,6 @@ namespace School.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ClassStudent", b =>
-                {
-                    b.Property<string>("ClassesClassId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StudentsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ClassesClassId", "StudentsId");
-
-                    b.HasIndex("StudentsId");
-
-                    b.ToTable("ClassStudent");
-                });
-
             modelBuilder.Entity("GradeSubject", b =>
                 {
                     b.Property<string>("GradesGradeId")
@@ -49,64 +34,7 @@ namespace School.Api.Migrations
 
                     b.HasIndex("SubjectsSubjectId");
 
-                    b.ToTable("GradeSubject");
-                });
-
-            modelBuilder.Entity("GradeTeacher", b =>
-                {
-                    b.Property<string>("GradesGradeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TeachersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("GradesGradeId", "TeachersId");
-
-                    b.HasIndex("TeachersId");
-
-                    b.ToTable("GradeTeacher");
-                });
-
-            modelBuilder.Entity("LevelTeacher", b =>
-                {
-                    b.Property<string>("LevelsLevelId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TeachersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LevelsLevelId", "TeachersId");
-
-                    b.HasIndex("TeachersId");
-
-                    b.ToTable("LevelTeacher");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("GradeSubject", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -235,302 +163,7 @@ namespace School.Api.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Answers");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Class", b =>
-                {
-                    b.Property<string>("ClassId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ClassName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GradeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("StudentCount")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClassId");
-
-                    b.HasIndex("GradeId");
-
-                    b.HasIndex("Id");
-
-                    b.ToTable("Classes");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.ClassLecture", b =>
-                {
-                    b.Property<string>("LectureId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ClassId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GradeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SubjectId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LectureId");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("GradeId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Lectures");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Exam", b =>
-                {
-                    b.Property<string>("ExamId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ExamName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExamTypeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GradeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SubjectId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ExamId");
-
-                    b.HasIndex("ExamTypeId");
-
-                    b.HasIndex("GradeId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Exams");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.ExamStudentScore", b =>
-                {
-                    b.Property<string>("ScoreID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ExamId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Score")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.HasKey("ScoreID");
-
-                    b.HasIndex("ExamId");
-
-                    b.HasIndex("Id");
-
-                    b.ToTable("ExamScores");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.ExamType", b =>
-                {
-                    b.Property<string>("ExamTypeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ExamTypeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ExamTypeId");
-
-                    b.ToTable("ExamTypes");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Grade", b =>
-                {
-                    b.Property<string>("GradeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GradeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LevelId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("GradeId");
-
-                    b.HasIndex("LevelId");
-
-                    b.ToTable("Grades");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Lesson", b =>
-                {
-                    b.Property<string>("LessonId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GradeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LessonName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubjectId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LessonId");
-
-                    b.HasIndex("GradeId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Lessons");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.LessonResources", b =>
-                {
-                    b.Property<string>("ResourceId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LessonId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Resource")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ResourceType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ResourceId");
-
-                    b.HasIndex("LessonId");
-
-                    b.ToTable("LessonResources");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Level", b =>
-                {
-                    b.Property<string>("LevelId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LevelName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LevelId");
-
-                    b.ToTable("Levels");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Question", b =>
-                {
-                    b.Property<string>("QuestionId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ExamId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("QuestionText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QuestionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("QuestionId");
-
-                    b.HasIndex("ExamId");
-
-                    b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Region", b =>
-                {
-                    b.Property<string>("RegionId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RegionName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubscriptionTierId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("RegionId");
-
-                    b.HasIndex("SubscriptionTierId");
-
-                    b.ToTable("Regions");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.StudentsAttendance", b =>
-                {
-                    b.Property<string>("AttendanceId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LectureId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AttendanceId");
-
-                    b.HasIndex("Id");
-
-                    b.HasIndex("LectureId");
-
-                    b.ToTable("StudentsAttendance");
+                    b.ToTable("Answers", (string)null);
                 });
 
             modelBuilder.Entity("School.Api.Entities.ApplicationRole", b =>
@@ -590,6 +223,10 @@ namespace School.Api.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -641,6 +278,260 @@ namespace School.Api.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("School.Api.Entities.Class", b =>
+                {
+                    b.Property<string>("ClassId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClassName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GradeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("StudentCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("ClassId");
+
+                    b.HasIndex("GradeId");
+
+                    b.ToTable("Classes", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.ClassLecture", b =>
+                {
+                    b.Property<string>("LectureId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClassId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GradeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SubjectId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LectureId");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Lectures", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.Exam", b =>
+                {
+                    b.Property<string>("ExamId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ExamName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExamTypeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GradeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SubjectId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ExamId");
+
+                    b.HasIndex("ExamTypeId");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Exams", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.ExamStudentScore", b =>
+                {
+                    b.Property<string>("ScoreID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ExamId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Score")
+                        .HasColumnType("decimal(10, 2)");
+
+                    b.HasKey("ScoreID");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("ExamScores", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.ExamType", b =>
+                {
+                    b.Property<string>("ExamTypeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ExamTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ExamTypeId");
+
+                    b.ToTable("ExamTypes", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.Grade", b =>
+                {
+                    b.Property<string>("GradeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GradeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LevelId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GradeId");
+
+                    b.HasIndex("LevelId");
+
+                    b.ToTable("Grades", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.Lesson", b =>
+                {
+                    b.Property<string>("LessonId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GradeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LessonName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LessonId");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Lessons", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.LessonResources", b =>
+                {
+                    b.Property<string>("ResourceId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LessonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Resource")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResourceType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ResourceId");
+
+                    b.HasIndex("LessonId");
+
+                    b.ToTable("LessonResources", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.Level", b =>
+                {
+                    b.Property<string>("LevelId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LevelName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LevelId");
+
+                    b.ToTable("Levels", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.Question", b =>
+                {
+                    b.Property<string>("QuestionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ExamId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuestionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("QuestionId");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("Questions", (string)null);
+                });
+
+            modelBuilder.Entity("School.Api.Entities.Region", b =>
+                {
+                    b.Property<string>("RegionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RegionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubscriptionTierId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RegionId");
+
+                    b.HasIndex("SubscriptionTierId");
+
+                    b.ToTable("Regions", (string)null);
+                });
+
             modelBuilder.Entity("School.Api.Entities.Subject", b =>
                 {
                     b.Property<string>("SubjectId")
@@ -652,7 +543,7 @@ namespace School.Api.Migrations
 
                     b.HasKey("SubjectId");
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
                 });
 
             modelBuilder.Entity("School.Api.Entities.Subscription", b =>
@@ -663,9 +554,6 @@ namespace School.Api.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -675,11 +563,9 @@ namespace School.Api.Migrations
 
                     b.HasKey("SubscriptionId");
 
-                    b.HasIndex("Id");
-
                     b.HasIndex("SubscriptionTierId");
 
-                    b.ToTable("Subscriptions");
+                    b.ToTable("Subscriptions", (string)null);
                 });
 
             modelBuilder.Entity("School.Api.Entities.SubscriptionTier", b =>
@@ -696,106 +582,7 @@ namespace School.Api.Migrations
 
                     b.HasKey("SubscriptionTierId");
 
-                    b.ToTable("SubscriptionTiers");
-                });
-
-            modelBuilder.Entity("StudentTeacher", b =>
-                {
-                    b.Property<string>("StudentsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TeachersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("StudentsId", "TeachersId");
-
-                    b.HasIndex("TeachersId");
-
-                    b.ToTable("StudentTeacher");
-                });
-
-            modelBuilder.Entity("SubjectTeacher", b =>
-                {
-                    b.Property<string>("SubjectsSubjectId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TeachersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("SubjectsSubjectId", "TeachersId");
-
-                    b.HasIndex("TeachersId");
-
-                    b.ToTable("SubjectTeacher");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Student", b =>
-                {
-                    b.HasBaseType("School.Api.Entities.ApplicationUser");
-
-                    b.Property<string>("GradeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("GradeId");
-
-                    b.HasDiscriminator().HasValue("Student");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Teacher", b =>
-                {
-                    b.HasBaseType("School.Api.Entities.ApplicationUser");
-
-                    b.Property<string>("RegionId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasIndex("RegionId");
-
-                    b.HasDiscriminator().HasValue("Teacher");
-                });
-
-            modelBuilder.Entity("ClassStudent", b =>
-                {
-                    b.HasOne("School.Api.Entities.Class", null)
-                        .WithMany()
-                        .HasForeignKey("ClassesClassId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("School.Api.Entities.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.ToTable("SubscriptionTiers", (string)null);
                 });
 
             modelBuilder.Entity("GradeSubject", b =>
@@ -809,36 +596,6 @@ namespace School.Api.Migrations
                     b.HasOne("School.Api.Entities.Subject", null)
                         .WithMany()
                         .HasForeignKey("SubjectsSubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GradeTeacher", b =>
-                {
-                    b.HasOne("School.Api.Entities.Grade", null)
-                        .WithMany()
-                        .HasForeignKey("GradesGradeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("School.Api.Entities.Teacher", null)
-                        .WithMany()
-                        .HasForeignKey("TeachersId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LevelTeacher", b =>
-                {
-                    b.HasOne("School.Api.Entities.Level", null)
-                        .WithMany()
-                        .HasForeignKey("LevelsLevelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("School.Api.Entities.Teacher", null)
-                        .WithMany()
-                        .HasForeignKey("TeachersId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -913,15 +670,7 @@ namespace School.Api.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("School.Api.Entities.Teacher", "Teacher")
-                        .WithMany("Classes")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Grade");
-
-                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ClassLecture", b =>
@@ -986,14 +735,7 @@ namespace School.Api.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("School.Api.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("Exam");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Grade", b =>
@@ -1059,32 +801,8 @@ namespace School.Api.Migrations
                     b.Navigation("SubscriptionTier");
                 });
 
-            modelBuilder.Entity("School.Api.Entities.StudentsAttendance", b =>
-                {
-                    b.HasOne("School.Api.Entities.Student", "Student")
-                        .WithMany("StudentAttendances")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("School.Api.Entities.ClassLecture", "Lecture")
-                        .WithMany()
-                        .HasForeignKey("LectureId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Lecture");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("School.Api.Entities.Subscription", b =>
                 {
-                    b.HasOne("School.Api.Entities.Teacher", "Teacher")
-                        .WithMany("Subscriptions")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("School.Api.Entities.SubscriptionTier", "SubscriptionTier")
                         .WithMany("Subscriptions")
                         .HasForeignKey("SubscriptionTierId")
@@ -1092,60 +810,6 @@ namespace School.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("SubscriptionTier");
-
-                    b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("StudentTeacher", b =>
-                {
-                    b.HasOne("School.Api.Entities.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("School.Api.Entities.Teacher", null)
-                        .WithMany()
-                        .HasForeignKey("TeachersId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SubjectTeacher", b =>
-                {
-                    b.HasOne("School.Api.Entities.Subject", null)
-                        .WithMany()
-                        .HasForeignKey("SubjectsSubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("School.Api.Entities.Teacher", null)
-                        .WithMany()
-                        .HasForeignKey("TeachersId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Student", b =>
-                {
-                    b.HasOne("School.Api.Entities.Grade", "Grade")
-                        .WithMany()
-                        .HasForeignKey("GradeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Grade");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Teacher", b =>
-                {
-                    b.HasOne("School.Api.Entities.Region", "Region")
-                        .WithMany()
-                        .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Region");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Exam", b =>
@@ -1182,18 +846,6 @@ namespace School.Api.Migrations
 
             modelBuilder.Entity("School.Api.Entities.SubscriptionTier", b =>
                 {
-                    b.Navigation("Subscriptions");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Student", b =>
-                {
-                    b.Navigation("StudentAttendances");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.Teacher", b =>
-                {
-                    b.Navigation("Classes");
-
                     b.Navigation("Subscriptions");
                 });
 #pragma warning restore 612, 618

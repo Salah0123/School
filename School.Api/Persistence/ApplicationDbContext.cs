@@ -19,11 +19,10 @@ namespace School.Api.Persistence
         public DbSet<Level> Levels { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Region> Regions { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Subject> Subjects { get; set; }
+/*        public DbSet<Student> Students { get; set; }
+*/        public DbSet<Subject> Subjects { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionTier> SubscriptionTiers { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
 
 
 

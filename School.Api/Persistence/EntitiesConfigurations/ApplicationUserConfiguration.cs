@@ -15,21 +15,21 @@ namespace School.Api.Persistence.EntitiesConfigurations
 
             //defaultData
 
-            var passwordHasher = new PasswordHasher<ApplicationUser>();
-            builder.HasData(new ApplicationUser 
-            { 
-                Id = DefaultUsers.AdminId, 
-                Email = DefaultUsers.AdminEmail, 
-                FirstName = "Hossam", 
-                LastName= "Salah", 
+            /*var passwordHasher = new PasswordHasher<ApplicationUser>();
+            builder.HasData(new ApplicationUser
+            {
+                Id = DefaultUsers.AdminId,
+                Email = DefaultUsers.AdminEmail,
+                FirstName = "Hossam",
+                LastName = "Salah",
                 UserName = DefaultUsers.AdminEmail,
                 NormalizedUserName = DefaultUsers.AdminEmail.ToUpper(),
                 PhoneNumber = DefaultUsers.AdminPhoneNumber,
                 SecurityStamp = DefaultUsers.AdminSecurityStamp,
                 ConcurrencyStamp = DefaultUsers.AdminConcurrencyStamp,
                 EmailConfirmed = true,
-                PasswordHash = passwordHasher.HashPassword(null!,DefaultUsers.AdminPassword)
-            });
+                PasswordHash = passwordHasher.HashPassword(null!, DefaultUsers.AdminPassword)
+            });*/
         }
         
     }

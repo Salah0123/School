@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace School.Api.Entities
 {
-    public class Teacher : ApplicationUser
+    /*public class Teacher : ApplicationUser
     {
         [ForeignKey("Region")]
         public string RegionId { get; set; }
@@ -18,5 +18,5 @@ namespace School.Api.Entities
         public virtual ICollection<Grade> Grades { get; set; }
         public virtual ICollection<Class> Classes { get; set; }
 
-    }
+    }*/
 }

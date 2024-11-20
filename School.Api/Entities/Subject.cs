@@ -3,15 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace School.Api.Entities
 {
-    public class Subject
+    public class Subject : BaseEntity
     {
-        [Key]
-        [Required]
-        public string SubjectId { get; set; }
         [Required]
         public string SubjectName { get; set; } = string.Empty;
-
-        public DateTime CreatedOn { get; set; }
 
         public virtual ICollection<Lesson> Lessons { get; set; }
         public virtual ICollection<Grade> Grades { get; set; }

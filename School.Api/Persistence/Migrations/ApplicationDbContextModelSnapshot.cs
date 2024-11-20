@@ -24,15 +24,15 @@ namespace School.Api.Migrations
 
             modelBuilder.Entity("GradeSubject", b =>
                 {
-                    b.Property<string>("GradesGradeId")
+                    b.Property<string>("GradesId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("SubjectsSubjectId")
+                    b.Property<string>("SubjectsId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("GradesGradeId", "SubjectsSubjectId");
+                    b.HasKey("GradesId", "SubjectsId");
 
-                    b.HasIndex("SubjectsSubjectId");
+                    b.HasIndex("SubjectsId");
 
                     b.ToTable("GradeSubject");
                 });
@@ -145,23 +145,50 @@ namespace School.Api.Migrations
 
             modelBuilder.Entity("School.Api.Entities.Answer", b =>
                 {
-                    b.Property<string>("AnswerId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AnswerText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("QuestionId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("AnswerId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Answers");
                 });
@@ -280,62 +307,128 @@ namespace School.Api.Migrations
 
             modelBuilder.Entity("School.Api.Entities.Class", b =>
                 {
-                    b.Property<string>("ClassId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ClassName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GradeId")
-                        .IsRequired()
+                    b.Property<string>("CreatedById")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("StudentCount")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
 
-                    b.HasKey("ClassId");
-
-                    b.HasIndex("GradeId");
-
-                    b.ToTable("Classes");
-                });
-
-            modelBuilder.Entity("School.Api.Entities.ClassLecture", b =>
-                {
-                    b.Property<string>("LectureId")
+                    b.Property<string>("DeletedBtId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ClassId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GradeId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StudentCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("UpdatedById");
+
+                    b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("School.Api.Entities.ClassLecture", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClassId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GradeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("SubjectId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("LectureId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ClassId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("GradeId");
 
                     b.HasIndex("SubjectId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Lectures");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Exam", b =>
                 {
-                    b.Property<string>("ExamId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ExamName")
                         .IsRequired()
@@ -349,11 +442,24 @@ namespace School.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("SubjectId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ExamId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("ExamTypeId");
 
@@ -361,17 +467,34 @@ namespace School.Api.Migrations
 
                     b.HasIndex("SubjectId");
 
+                    b.HasIndex("UpdatedById");
+
                     b.ToTable("Exams");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ExamStudentScore", b =>
                 {
-                    b.Property<string>("ScoreID")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ExamId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Notes")
                         .IsRequired()
@@ -380,58 +503,136 @@ namespace School.Api.Migrations
                     b.Property<decimal>("Score")
                         .HasColumnType("decimal(10, 2)");
 
-                    b.HasKey("ScoreID");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("ExamId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("ExamScores");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ExamType", b =>
                 {
-                    b.Property<string>("ExamTypeId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ExamTypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ExamTypeId");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("ExamTypes");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Grade", b =>
                 {
-                    b.Property<string>("GradeId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GradeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LevelId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("GradeId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("LevelId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Lesson", b =>
                 {
-                    b.Property<string>("LessonId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("GradeId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LessonName")
                         .IsRequired()
@@ -441,19 +642,46 @@ namespace School.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("LessonId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("GradeId");
 
                     b.HasIndex("SubjectId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Lessons");
                 });
 
             modelBuilder.Entity("School.Api.Entities.LessonResources", b =>
                 {
-                    b.Property<string>("ResourceId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LessonId")
                         .IsRequired()
@@ -467,38 +695,89 @@ namespace School.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ResourceId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("LessonId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("LessonResources");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Level", b =>
                 {
-                    b.Property<string>("LevelId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LevelName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("LevelId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Levels");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Question", b =>
                 {
-                    b.Property<string>("QuestionId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ExamId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("QuestionText")
                         .IsRequired()
@@ -508,20 +787,44 @@ namespace School.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("QuestionId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("ExamId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Region", b =>
                 {
-                    b.Property<string>("RegionId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("RegionName")
                         .IsRequired()
@@ -534,37 +837,88 @@ namespace School.Api.Migrations
                     b.Property<int>("TeacherCount")
                         .HasColumnType("int");
 
-                    b.HasKey("RegionId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("SubscriptionTierId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Regions");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Subject", b =>
                 {
-                    b.Property<string>("SubjectId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("SubjectName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SubjectId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Subscription", b =>
                 {
-                    b.Property<string>("SubscriptionId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -573,26 +927,65 @@ namespace School.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("SubscriptionId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
 
                     b.HasIndex("SubscriptionTierId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("School.Api.Entities.SubscriptionTier", b =>
                 {
-                    b.Property<string>("SubscriptionTierId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBtId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(5, 2)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SubscriptionTierId");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedBtId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("SubscriptionTiers");
                 });
@@ -601,13 +994,13 @@ namespace School.Api.Migrations
                 {
                     b.HasOne("School.Api.Entities.Grade", null)
                         .WithMany()
-                        .HasForeignKey("GradesGradeId")
+                        .HasForeignKey("GradesId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("School.Api.Entities.Subject", null)
                         .WithMany()
-                        .HasForeignKey("SubjectsSubjectId")
+                        .HasForeignKey("SubjectsId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -665,24 +1058,66 @@ namespace School.Api.Migrations
 
             modelBuilder.Entity("School.Api.Entities.Answer", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.Question", "Question")
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Question");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Class", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.Grade", "Grade")
                         .WithMany()
                         .HasForeignKey("GradeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Grade");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ClassLecture", b =>
@@ -692,6 +1127,16 @@ namespace School.Api.Migrations
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("School.Api.Entities.Grade", "Grade")
                         .WithMany()
@@ -705,15 +1150,36 @@ namespace School.Api.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Class");
 
                     b.Navigation("Grade");
 
                     b.Navigation("Subject");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Exam", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.ExamType", "ExamType")
                         .WithMany("Exams")
                         .HasForeignKey("ExamTypeId")
@@ -732,37 +1198,124 @@ namespace School.Api.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("ExamType");
 
                     b.Navigation("Grade");
 
                     b.Navigation("Subject");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ExamStudentScore", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.Exam", "Exam")
                         .WithMany("ExamStudentScores")
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Exam");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
+                });
+
+            modelBuilder.Entity("School.Api.Entities.ExamType", b =>
+                {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Grade", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.Level", "Level")
                         .WithMany("Grades")
                         .HasForeignKey("LevelId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Level");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Lesson", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.Grade", "Grade")
                         .WithMany()
                         .HasForeignKey("GradeId")
@@ -775,53 +1328,220 @@ namespace School.Api.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Grade");
 
                     b.Navigation("Subject");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.LessonResources", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.Lesson", "Lesson")
                         .WithMany("LessonResources")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Lesson");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
+                });
+
+            modelBuilder.Entity("School.Api.Entities.Level", b =>
+                {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Question", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.Exam", "Exam")
                         .WithMany("ExamQuestions")
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Exam");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Region", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.SubscriptionTier", "SubscriptionTier")
                         .WithMany()
                         .HasForeignKey("SubscriptionTierId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("SubscriptionTier");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
+                });
+
+            modelBuilder.Entity("School.Api.Entities.Subject", b =>
+                {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Subscription", b =>
                 {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("School.Api.Entities.SubscriptionTier", "SubscriptionTier")
                         .WithMany("Subscriptions")
                         .HasForeignKey("SubscriptionTierId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("SubscriptionTier");
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
+                });
+
+            modelBuilder.Entity("School.Api.Entities.SubscriptionTier", b =>
+                {
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserCreated")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserDeleted")
+                        .WithMany()
+                        .HasForeignKey("DeletedBtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("UserCreated");
+
+                    b.Navigation("UserDeleted");
+
+                    b.Navigation("UserUpdated");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Exam", b =>

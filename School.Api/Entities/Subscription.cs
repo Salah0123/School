@@ -3,12 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Api.Entities
 {
-    public class Subscription
+    public class Subscription : BaseEntity
     {
-        [Key]
-        [Required]
-        public string SubscriptionId { get; set; }
-
         /*[ForeignKey("Teacher")]
         [Required]
         public string Id { get; set; }

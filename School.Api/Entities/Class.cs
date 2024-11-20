@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace School.Api.Entities
 {
     // هل الفصل مرتبط بمادة ؟
-    public class Class
+    public class Class : BaseEntity
     {
-        [Key]
-        [Required]
-        public string ClassId { get; set; }
         [Required]
         public string ClassName { get; set; }
 

@@ -2,11 +2,8 @@
 
 namespace School.Api.Entities
 {
-    public class ExamType
+    public class ExamType : BaseEntity
     {
-        [Key]
-        [Required]
-        public string ExamTypeId { get; set; }
         public string ExamTypeName { get; set; } = string.Empty;
 
         public virtual ICollection<Exam> Exams { get; set; }

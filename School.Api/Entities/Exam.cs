@@ -4,11 +4,8 @@ using System.Diagnostics;
 
 namespace School.Api.Entities
 {
-    public class Exam
+    public class Exam : BaseEntity
     {
-        [Key]
-        [Required]
-        public string ExamId { get; set; }
         [Required]
         public string ExamName { get; set; }
 

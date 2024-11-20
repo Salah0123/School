@@ -1,4 +1,4 @@
-﻿/*using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using School.Api.Entities;
 
@@ -8,8 +8,8 @@ namespace School.Api.Persistence.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<Subject> builder)
         {
-            builder.HasIndex(x => x.SubjectName).IsUnique();
-            builder.Property(x => x.SubjectName).HasMaxLength(100);
+            builder.HasIndex(x => x.Name).IsUnique();
+            builder.Property(x => x.Name).HasMaxLength(100);
         }
     }
-}*/
+}

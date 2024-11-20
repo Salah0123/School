@@ -15,13 +15,15 @@
 
 //        public virtual ICollection<Lesson> Lessons { get; set; }
 //        public virtual ICollection<Grade> Grades { get; set; }
-///*        public virtual ICollection<Teacher> Teachers { get; set; }
 //*/    }
 //}
 
 
 
 
+using System.ComponentModel.DataAnnotations;
+
+///*        public virtual ICollection<Teacher> Teachers { get; set; }
 namespace School.Api.Entities
 {
     public class Subject : BaseEntity

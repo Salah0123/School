@@ -7,7 +7,6 @@ namespace School.Api.Entities
     {
         [Required]
         public string RegionName { get; set; }
-        public int TeacherCount { get; set; } = 0;
 
         [ForeignKey("SubscriptionTier")]
         [Required]

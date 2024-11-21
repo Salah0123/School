@@ -15,7 +15,7 @@ namespace School.Api.Persistence.EntitiesConfigurations
 
             //defaultData
 
-            /*var passwordHasher = new PasswordHasher<ApplicationUser>();
+            var passwordHasher = new PasswordHasher<ApplicationUser>();
             builder.HasData(new ApplicationUser
             {
                 Id = DefaultUsers.AdminId,
@@ -29,7 +29,7 @@ namespace School.Api.Persistence.EntitiesConfigurations
                 ConcurrencyStamp = DefaultUsers.AdminConcurrencyStamp,
                 EmailConfirmed = true,
                 PasswordHash = passwordHasher.HashPassword(null!, DefaultUsers.AdminPassword)
-            });*/
+            });
         }
         
     }

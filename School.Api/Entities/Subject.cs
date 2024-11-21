@@ -18,12 +18,9 @@
 //*/    }
 //}
 
-
-
-
 using System.ComponentModel.DataAnnotations;
-
-///*        public virtual ICollection<Teacher> Teachers { get; set; }
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 namespace School.Api.Entities
 {
     public class Subject : BaseEntity
@@ -31,8 +28,14 @@ namespace School.Api.Entities
         [Required]
         public string SubjectName { get; set; } = string.Empty;
 
+        [ForeignKey("Grade")]
+        public string GradeId { get; set; }
+        [JsonIgnore]
+        public virtual Grade Grade { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<Lesson> Lessons { get; set; }
-        public virtual ICollection<Grade> Grades { get; set; }
+
 /*        public virtual ICollection<Teacher> Teachers { get; set; }
 */    }
 }

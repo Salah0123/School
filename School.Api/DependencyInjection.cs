@@ -97,6 +97,8 @@ namespace School.Api
         {
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IRegionService, RegionService>();
+            services.AddScoped<ILevelService, LevelService>();
+            services.AddScoped<IGradeService, GradeService>();
             return services;
         }
 

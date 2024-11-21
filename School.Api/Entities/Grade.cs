@@ -13,8 +13,10 @@ namespace School.Api.Entities
         [ForeignKey("Level")]
         [Required]
         public string LevelId { get; set; }
+        [JsonIgnore]
         public virtual Level Level { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Subject> Subjects { get; set; }
 /*        public ICollection<Teacher> Teachers { get; set; }
 */    }

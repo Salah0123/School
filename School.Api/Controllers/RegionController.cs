@@ -19,30 +19,35 @@ namespace School.Api.Controllers
             this.regionService = regionService;
         }
 
+
         [HttpGet("GetAllRegions")]
         public async Task<IActionResult> GetAllRegions()
         {
-            var students = await regionService.GetAllAsync();
-            if(students == null)
+            var regions = await regionService.GetAllAsync();
+            if(regions == null)
                 return NotFound();
-            List<GetRegionDTO> studentsDto = [];
-            foreach (var student in students)
+            List<GetRegionDTO> regionsDto = [];
+            foreach (var region in regions)
             {
-               studentsDto.Add(student.ToGetRegionDto());
-                studentsDto[^1].TeacherCount = 0; //Logic needs to be edited after adding teacher realtionship with region
+               regionsDto.Add(region.ToGetRegionDto());
+                regionsDto[^1].TeacherCount = 0; //Logic needs to be edited after adding teacher realtionship with region
             }
-            if(studentsDto == null)
+            if(regionsDto == null)
                 return BadRequest();
 
-            return Ok(studentsDto);
+            return Ok(regionsDto);
         }
+
+
         [HttpPost("AddRegion")]
         public async Task<IActionResult> AddRegionAsync(AddRegionDTO regionDTO)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
+
             var region = regionDTO.ToAddRegionDto();
             region.CreatedOn = DateTime.Now;
+
             var addedRegion = await regionService.CreateAsync(region);
             if (addedRegion == null)
                 return BadRequest();
@@ -50,7 +55,7 @@ namespace School.Api.Controllers
             return Ok(addedRegion);
         }
 
-        [HttpPatch("EditRegion{id}")]
+        [HttpPatch("EditRegion/{id}")]
         public async Task<IActionResult> UpdateRegionAsync(string id, AddRegionDTO regionDto)
         {
             if(!ModelState.IsValid)

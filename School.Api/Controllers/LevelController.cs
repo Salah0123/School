@@ -39,7 +39,7 @@ namespace School.Api.Controllers
             }
 
             if (levelsDto == null)
-                return BadRequest();
+                return Ok("No Levels Found");
 
             return Ok(levelsDto);
         }

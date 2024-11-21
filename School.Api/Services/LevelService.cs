@@ -39,7 +39,7 @@ namespace School.Api.Services
             return "Deleted Successfully";
         }
 
-        public async Task<(ICollection<Level>, string?)> GetAllAsync()
+        public async Task<(ICollection<Level?>, string?)> GetAllAsync()
         {
             var levels = await _context.Levels.ToListAsync(); 
             if(levels == null)
@@ -58,12 +58,12 @@ namespace School.Api.Services
         {
             var level = await _context.Levels.FindAsync(id);
             if (level == null)
-                return (null, "Region Not Found");
+                return (null, "Level Not Found");
             level.LevelName = entity.LevelName;
             level.UpdatedOn = DateTime.Now;
             await _context.SaveChangesAsync();
 
-            return (level, "Region Updated");
+            return (level, "Level Updated");
         }
     }
 }

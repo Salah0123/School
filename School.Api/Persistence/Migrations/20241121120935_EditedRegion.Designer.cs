@@ -9,11 +9,11 @@ using School.Api.Persistence;
 
 #nullable disable
 
-namespace School.Api.Migrations
+namespace School.Api.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241120180017_BaseEntityAdded")]
-    partial class BaseEntityAdded
+    [Migration("20241121120935_EditedRegion")]
+    partial class EditedRegion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -250,17 +250,11 @@ namespace School.Api.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -834,11 +828,7 @@ namespace School.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubscriptionTierId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("TeacherCount")
-                        .HasColumnType("int");
 
                     b.Property<string>("UpdatedById")
                         .HasColumnType("nvarchar(450)");
@@ -1450,8 +1440,7 @@ namespace School.Api.Migrations
                     b.HasOne("School.Api.Entities.SubscriptionTier", "SubscriptionTier")
                         .WithMany()
                         .HasForeignKey("SubscriptionTierId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("School.Api.Entities.ApplicationUser", "UserUpdated")
                         .WithMany()

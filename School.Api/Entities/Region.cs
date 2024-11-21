@@ -9,8 +9,8 @@ namespace School.Api.Entities
         public string RegionName { get; set; }
 
         [ForeignKey("SubscriptionTier")]
-        [Required]
-        public string SubscriptionTierId { get; set; }
-        public SubscriptionTier SubscriptionTier { get; set; }
+
+        public string? SubscriptionTierId { get; set; }
+        public virtual SubscriptionTier SubscriptionTier { get; set; }
     }
 }

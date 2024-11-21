@@ -95,6 +95,7 @@ namespace School.Api
         private static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IRegionService, RegionService>();
             return services;
         }
 

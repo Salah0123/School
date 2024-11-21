@@ -9,15 +9,15 @@ namespace School.Api.Entities
         public string Id { get; set; } = Guid.NewGuid().ToString();
         [ForeignKey("UserCreated")]
         public string? CreatedById { get; set; }
-        public ApplicationUser UserCreated { get; set; }
+        public virtual ApplicationUser UserCreated { get; set; }
 
         [ForeignKey("UserUpdated")]
         public string? UpdatedById { get; set; }
-        public ApplicationUser UserUpdated { get; set; }
+        public virtual ApplicationUser UserUpdated { get; set; }
 
         [ForeignKey("UserDeleted")]
         public string? DeletedBtId { get; set; }
-        public ApplicationUser UserDeleted { get; set; }
+        public virtual ApplicationUser UserDeleted { get; set; }
 
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set;}

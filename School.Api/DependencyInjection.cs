@@ -83,6 +83,7 @@ namespace School.Api
             return services;
         }
 
+
         private static IServiceCollection AddConnectionServices(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection") ??

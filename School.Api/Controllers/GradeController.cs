@@ -44,15 +44,15 @@ namespace School.Api.Controllers
 
 
         [HttpPost("AddGrade")]
-        public async Task<IActionResult> AddGradeAsync(string gradeId, AddGradeDTO gradeDto)
+        public async Task<IActionResult> AddGradeAsync(string levelId, AddGradeDTO gradeDto)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
 
             var grade = gradeDto.ToGrade();
-            grade.LevelId = gradeId;
+            grade.LevelId = levelId;
             grade.CreatedOn = DateTime.Now;
 
-            var addedGrade = await gradeService.CreateAsync(gradeId, grade);
+            var addedGrade = await gradeService.CreateAsync(levelId, grade);
 
             return Ok(addedGrade);
         }

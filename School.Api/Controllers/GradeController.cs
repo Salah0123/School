@@ -35,6 +35,10 @@ namespace School.Api.Controllers
             {
                 gradesDTO.Add(grade.ToGetGradeDTO());
                 gradesDTO[^1].SubjectCount = await _context.Subjects.Where(s => s.GradeId == grade.Id).CountAsync();
+                gradesDTO[^1].LevelName = await _context.Levels
+                    .Where(l => l.Id == grade.LevelId)
+                    .Select(l => l.LevelName)
+                    .SingleOrDefaultAsync();
             }
             if (gradesDTO == null)
                 return Ok("No Grades Found");

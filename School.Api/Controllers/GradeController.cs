@@ -46,6 +46,31 @@ namespace School.Api.Controllers
             return Ok(gradesDTO);
         }
 
+        [HttpGet("GetByLevelId/{LevelId}")]
+        public async Task<IActionResult> GetByLevel(string LevelId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var grades = await gradeService.GetGradesByLevelAsync(LevelId);
+            if (grades == null)
+                return Ok("No Grades Found");
+            List<GetGradeDTO> gradesDTO = [];
+            foreach (var grade in grades)
+            {
+                gradesDTO.Add(grade.ToGetGradeDTO());
+                gradesDTO[^1].SubjectCount = await _context.Subjects.Where(s => s.GradeId == grade.Id).CountAsync();
+                gradesDTO[^1].LevelName = await _context.Levels
+                    .Where(l => l.Id == grade.LevelId)
+                    .Select(l => l.LevelName)
+                    .SingleOrDefaultAsync();
+            }
+            if (gradesDTO == null)
+                throw new NullReferenceException("Oops There is a problem");
+
+            return Ok(gradesDTO);
+        }
+
 
         [HttpPost("AddGrade")]
         public async Task<IActionResult> AddGradeAsync(string levelId, AddGradeDTO gradeDto)

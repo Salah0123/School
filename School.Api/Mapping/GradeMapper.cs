@@ -1,6 +1,5 @@
 ﻿using School.Api.DTOs;
 using School.Api.Entities;
-using System.Runtime.CompilerServices;
 
 namespace School.Api.Mapping
 {

@@ -98,6 +98,7 @@ namespace School.Api
             services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<ILevelService, LevelService>();
             services.AddScoped<IGradeService, GradeService>();
+            services.AddScoped<ISubjectService, SubjectService>();
             return services;
         }
 

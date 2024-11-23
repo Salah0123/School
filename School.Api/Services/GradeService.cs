@@ -71,6 +71,13 @@ namespace School.Api.Services
             return (grade, "Grade Updated");
         }
 
+        public async Task<ICollection<Grade>> GetGradesByLevelAsync(string LevelId)
+        {
+            var grades = await _context.Grades.Where(g => g.LevelId == LevelId).ToListAsync();
+            if (grades == null)
+                throw new Exception("No Grades found for specified Level");
 
+            return grades;
+        }
     }
 }

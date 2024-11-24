@@ -91,7 +91,7 @@ namespace School.Api.Controllers
         }
 
 
-        [HttpPost("AddSubject")]
+        [HttpPost("AddSubject/{gradeId}")]
         public async Task<IActionResult> CreateAsync(string gradeId, AddSubjectDTO subjectDTO)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.Api.Persistence;
 
@@ -11,9 +12,11 @@ using School.Api.Persistence;
 namespace School.Api.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241124152658_gradeSubjectLesson")]
+    partial class gradeSubjectLesson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -606,6 +609,10 @@ namespace School.Api.Persistence.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("GradeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -635,6 +642,8 @@ namespace School.Api.Persistence.Migrations
                     b.HasIndex("CreatedById");
 
                     b.HasIndex("DeletedBtId");
+
+                    b.HasIndex("GradeId");
 
                     b.HasIndex("SubjectId");
 
@@ -1283,6 +1292,12 @@ namespace School.Api.Persistence.Migrations
                         .HasForeignKey("DeletedBtId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("School.Api.Entities.Grade", "Grade")
+                        .WithMany()
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("School.Api.Entities.Subject", "Subject")
                         .WithMany("Lessons")
                         .HasForeignKey("SubjectId")
@@ -1293,6 +1308,8 @@ namespace School.Api.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Grade");
 
                     b.Navigation("Subject");
 

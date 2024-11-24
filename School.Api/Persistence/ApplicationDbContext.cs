@@ -78,26 +78,16 @@ namespace School.Api.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(modelBuilder);
-
+            
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(e => e.GetForeignKeys()))
             {
-                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+                    foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-            modelBuilder.Entity<Grade>()
-                .HasOne(g => g.Level)
-                .WithMany(l => l.Grades)
-                .HasForeignKey(g => g.LevelId)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Subject>()
-                .HasOne(s => s.Grade)
-                .WithMany(g => g.Subjects)
-                .HasForeignKey(s => s.GradeId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

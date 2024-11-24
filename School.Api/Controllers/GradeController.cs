@@ -47,14 +47,14 @@ namespace School.Api.Controllers
         }
 
         [HttpGet("GetByLevelId/{LevelId}")]
-        public async Task<IActionResult> GetByLevel(string LevelId)
+        public async Task<IActionResult> GetByLevelAsync(string LevelId)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             var grades = await gradeService.GetGradesByLevelAsync(LevelId);
             if (grades == null)
-                return Ok("No Grades Found");
+                return Ok("Invalid Level Id");
             List<GetGradeDTO> gradesDTO = [];
             foreach (var grade in grades)
             {
@@ -66,7 +66,7 @@ namespace School.Api.Controllers
                     .SingleOrDefaultAsync();
             }
             if (gradesDTO == null)
-                throw new NullReferenceException("Oops There is a problem");
+                return NotFound("No grades Found for Specified Level");
 
             return Ok(gradesDTO);
         }
@@ -82,6 +82,7 @@ namespace School.Api.Controllers
             grade.CreatedOn = DateTime.Now;
 
             var addedGrade = await gradeService.CreateAsync(levelId, grade);
+            if (addedGrade == null) return BadRequest(addedGrade);
 
             return Ok(addedGrade);
         }
@@ -109,7 +110,7 @@ namespace School.Api.Controllers
 
             var result = await gradeService.DeleteAsync(id);
 
-            if (result == "Region Not Found")
+            if (result == "Grade Not Found")
                 return NotFound(new { Message = result });
 
             return Ok(new { Message = result });

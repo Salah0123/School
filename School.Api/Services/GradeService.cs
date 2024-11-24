@@ -35,7 +35,7 @@ namespace School.Api.Services
         {
             var grade = await _context.Grades.FindAsync(id);
             if (grade == null)
-                return "Region Not Found";
+                return "Subject Not Found";
 
             _context.Grades.Remove(grade);
 
@@ -47,7 +47,7 @@ namespace School.Api.Services
         public async Task<(ICollection<Grade?>, string?)> GetAllAsync()
         {
             var grades = await _context.Grades.ToListAsync();
-            if (grades == null || grades.Count == 0)
+            if (grades == null)
                 return (null, "No Grades Found");
 
             return (grades, null);
@@ -73,6 +73,8 @@ namespace School.Api.Services
 
         public async Task<ICollection<Grade>> GetGradesByLevelAsync(string LevelId)
         {
+            var level = await _context.Levels.FindAsync(LevelId);
+            if (level == null) return null;
             var grades = await _context.Grades.Where(g => g.LevelId == LevelId).ToListAsync();
             if (grades == null)
                 throw new Exception("No Grades found for specified Level");

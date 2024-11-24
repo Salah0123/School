@@ -2,10 +2,9 @@
 
 namespace School.Api.DTOs
 {
-    public class AddGradeDTO
+    public class AddSubjectDTO
     {
         [Required]
-        public string GradeName { get; set; }
-
+        public string SubjectName { get; set; }
     }
 }

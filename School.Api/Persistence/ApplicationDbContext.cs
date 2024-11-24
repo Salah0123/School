@@ -92,6 +92,12 @@ namespace School.Api.Persistence
                 .WithMany(l => l.Grades)
                 .HasForeignKey(g => g.LevelId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Subject>()
+                .HasOne(s => s.Grade)
+                .WithMany(g => g.Subjects)
+                .HasForeignKey(s => s.GradeId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace School.Api.Controllers
 
 
         [HttpPatch("EditLesson/{lessonId}")]
-        public async Task<IActionResult> UpdateAsync(string lessonId, AddLessonDTO lessonDTO)
+        public async Task<IActionResult> UpdateAsync(string lessonId, UpdateLessonDTO lessonDTO)
         {
             if (!ModelState.IsValid) return BadRequest(lessonDTO);
 

@@ -10,6 +10,6 @@ namespace School.Api.Services
         Task<(Lesson?, string?)> GetByIdAsync(string LessonId);
         Task<(bool?, string?)> CreateAsync(string subjectId, Lesson entity);
         Task<(bool?, string?)> DeleteAsync(string id);
-        Task<(GetLessonDTO?, string?)> UpdateAsync(string id, AddLessonDTO entity);
+        Task<(GetLessonDTO?, string?)> UpdateAsync(string id, UpdateLessonDTO entity);
     }
 }

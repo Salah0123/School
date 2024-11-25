@@ -64,13 +64,14 @@ namespace School.Api.Services
             throw new NotImplementedException();
         }
 
-        public async Task<(GetLessonDTO?, string?)> UpdateAsync(string id, AddLessonDTO entity)
+        public async Task<(GetLessonDTO?, string?)> UpdateAsync(string id, UpdateLessonDTO entity)
         {
             var lesson = await _context.Lessons.FindAsync(id);
             if (lesson == null)
                 return (null, "Lesson Not Found");
 
             lesson.LessonName = entity.LessonName;
+            lesson.Status = entity.status;
             lesson.UpdatedOn = DateTime.Now;
 
             await _context.SaveChangesAsync();

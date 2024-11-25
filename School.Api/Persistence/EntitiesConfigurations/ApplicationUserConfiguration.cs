@@ -6,7 +6,7 @@ using School.Api.Entities;
 
 namespace School.Api.Persistence.EntitiesConfigurations
 {
-    /*public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
+    public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
@@ -31,6 +31,6 @@ namespace School.Api.Persistence.EntitiesConfigurations
                 PasswordHash = passwordHasher.HashPassword(null!, DefaultUsers.AdminPassword)
             });
         }
-        
-    }*/
+
+    }
 }

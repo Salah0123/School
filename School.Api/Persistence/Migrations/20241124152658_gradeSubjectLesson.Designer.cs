@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.Api.Persistence;
 
@@ -11,9 +12,11 @@ using School.Api.Persistence;
 namespace School.Api.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241124152658_gradeSubjectLesson")]
+    partial class gradeSubjectLesson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,7 +178,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ApplicationRole", b =>
@@ -331,7 +334,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Classes", (string)null);
+                    b.ToTable("Classes");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ClassLecture", b =>
@@ -389,7 +392,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Lectures", (string)null);
+                    b.ToTable("Lectures");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Exam", b =>
@@ -448,7 +451,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Exams", (string)null);
+                    b.ToTable("Exams");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ExamStudentScore", b =>
@@ -498,7 +501,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("ExamScores", (string)null);
+                    b.ToTable("ExamScores");
                 });
 
             modelBuilder.Entity("School.Api.Entities.ExamType", b =>
@@ -539,7 +542,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("ExamTypes", (string)null);
+                    b.ToTable("ExamTypes");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Grade", b =>
@@ -586,7 +589,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Grades", (string)null);
+                    b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Lesson", b =>
@@ -605,6 +608,10 @@ namespace School.Api.Persistence.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("GradeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -636,11 +643,13 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("DeletedBtId");
 
+                    b.HasIndex("GradeId");
+
                     b.HasIndex("SubjectId");
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Lessons", (string)null);
+                    b.ToTable("Lessons");
                 });
 
             modelBuilder.Entity("School.Api.Entities.LessonResources", b =>
@@ -691,7 +700,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("LessonResources", (string)null);
+                    b.ToTable("LessonResources");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Level", b =>
@@ -732,7 +741,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Levels", (string)null);
+                    b.ToTable("Levels");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Question", b =>
@@ -783,7 +792,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Region", b =>
@@ -829,7 +838,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Regions", (string)null);
+                    b.ToTable("Regions");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Subject", b =>
@@ -876,7 +885,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Subjects", (string)null);
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("School.Api.Entities.Subscription", b =>
@@ -925,7 +934,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("Subscriptions", (string)null);
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("School.Api.Entities.SubscriptionTier", b =>
@@ -969,7 +978,7 @@ namespace School.Api.Persistence.Migrations
 
                     b.HasIndex("UpdatedById");
 
-                    b.ToTable("SubscriptionTiers", (string)null);
+                    b.ToTable("SubscriptionTiers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1283,6 +1292,12 @@ namespace School.Api.Persistence.Migrations
                         .HasForeignKey("DeletedBtId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("School.Api.Entities.Grade", "Grade")
+                        .WithMany()
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("School.Api.Entities.Subject", "Subject")
                         .WithMany("Lessons")
                         .HasForeignKey("SubjectId")
@@ -1293,6 +1308,8 @@ namespace School.Api.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Grade");
 
                     b.Navigation("Subject");
 

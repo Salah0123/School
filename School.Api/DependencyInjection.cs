@@ -100,6 +100,7 @@ namespace School.Api
             services.AddScoped<ILevelService, LevelService>();
             services.AddScoped<IGradeService, GradeService>();
             services.AddScoped<ISubjectService, SubjectService>();
+            services.AddScoped<ILessonService, LessonService>();
             return services;
         }
 

@@ -4,12 +4,14 @@ using School.Api.Entities;
 
 namespace School.Api.Persistence.EntitiesConfigurations
 {
-    /*public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
+    public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
     {
         public void Configure(EntityTypeBuilder<Subject> builder)
         {
-            builder.HasIndex(x => x.Name).IsUnique();
-            builder.Property(x => x.Name).HasMaxLength(100);
+            builder.HasOne(s => s.Grade)
+                .WithMany(g => g.Subjects)
+                .HasForeignKey(s => s.GradeId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
-    }*/
+    }
 }
